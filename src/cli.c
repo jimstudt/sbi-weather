@@ -7,9 +7,9 @@
 
 #define MAX_LINE 127
 
-static void dispatch_command( const char *line);
+static void dispatch_command( const char *line, const struct command commands[] );
 
-void poll_cli(void) {
+void poll_cli( const struct command commands[] ) {
     static char line[MAX_LINE+1];
     static short lineLen = 0;
 
@@ -24,7 +24,7 @@ void poll_cli(void) {
 	    putchar('\n');
 	    if ( lineLen > 0 ) {
 		line[lineLen] = 0;
-		dispatch_command(line);
+		dispatch_command(line, commands);
 		lineLen = 0;
 	    }
 	    break;
@@ -35,9 +35,15 @@ void poll_cli(void) {
     }
 }
 
-static void dispatch_command( const char *line) {
-    if ( memcmp( line, "reset", 5) == 0) {
-	wipe();
+static void dispatch_command( const char *line, const struct command commands[] ) {
+    for ( int i = 0; commands[i].name != 0; i++) {
+	int len = strlen( commands[i].name);
+	if ( memcmp( line, commands[i].name, len) == 0 &&
+	     ( line[len] == 0 || line[len] == ' ' || line[len] == '\t')) {
+	    (commands[i].func)(line);
+	    return;
+	}
     }
-    printf("Dispatch: '%s'\n", line);
+    
+    printf("Unknown command: '%s'\n", line);
 }

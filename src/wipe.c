@@ -5,7 +5,7 @@
 #include "hardware/sync.h"
 #include "pico/multicore.h"
 
-void wipe(void) {
+void wipe(const char *line) {
     const uint8_t blank[256] = {0};
 
     // Stop core1. We better be core0.

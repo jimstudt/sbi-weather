@@ -1,6 +1,11 @@
 #ifndef CLI_IS_IN
 #define CLI_IS_IN
 
-void poll_cli(void);
+struct command {
+    const char *name;
+    void (*func)(const char *line);
+};
+    
+void poll_cli( const struct command commands[] );
 
 #endif

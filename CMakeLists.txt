@@ -14,13 +14,16 @@ add_executable(sbi-weather
     src/sbi-weather.c
     src/cli.c
     src/wipe.c
+    src/info.c
 )
 
 # Add pico_stdlib library which aggregates commonly used features
 target_link_libraries(sbi-weather
   pico_stdlib
+  pico_multicore
   hardware_flash
-  pico_multicore )
+  hardware_adc
+  )
 
 # enable usb output, disable uart output
 pico_enable_stdio_usb(sbi-weather 1)
