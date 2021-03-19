@@ -17,7 +17,15 @@ add_executable(sbi-weather
     src/info.c
 )
 
-# Add pico_stdlib library which aggregates commonly used features
+#
+# Turn on -Wall and -Werror
+#
+# DEFECT: I can't keep these out of the tiny-usb code, I have
+#         no idea why and it contains a 'strict-overflow' warning,
+#         hence the -Wno-error=strict-overflow
+#
+target_compile_options( sbi-weather PRIVATE -Wall -Werror -Wno-error=strict-overflow )
+  
 target_link_libraries(sbi-weather
   pico_stdlib
   pico_multicore
