@@ -29,6 +29,7 @@ target_compile_options( sbi-weather PRIVATE -Wall -Werror -Wno-error=strict-over
 target_link_libraries(sbi-weather
   pico_stdlib
   pico_multicore
+  pico_unique_id
   hardware_flash
   hardware_adc
   )
