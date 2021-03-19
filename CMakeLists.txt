@@ -15,6 +15,7 @@ add_executable(sbi-weather
     src/cli.c
     src/wipe.c
     src/info.c
+    src/store.c
 )
 
 #

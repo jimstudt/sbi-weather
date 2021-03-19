@@ -7,11 +7,13 @@
 #include "cli.h"
 #include "info.h"
 #include "wipe.h"
+#include "store.h"
 
 const uint LED_PIN = 25;
 
 const struct command commands[] = { { "wipe", wipe },
 				    { "info", print_info },
+				    { "store", print_store },
 				    { 0,0} };
 				   
 int main() {
