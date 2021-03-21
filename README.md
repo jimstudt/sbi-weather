@@ -16,7 +16,7 @@ My Raspberry Pi Pico weather station
 
 - BME280 pressure, humidity, temperature. The temperature accuracy isn't great.
   and is subject to self-heating.
-- Anemometer and direction from, hmm, I"ll have to look that up. This will need
+- Anemometer and direction froma LaCrosse TX23U wind sensor. This will need
   a PIO state machine to record the bit stream timing for decoding.
 - Maybe three or so one-wire temperature sensors to put on sunny side, shady side,
   and one in the ground?
