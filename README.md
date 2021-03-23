@@ -22,3 +22,5 @@ My Raspberry Pi Pico weather station
   and one in the ground?
 - Hot wire anemometer? I could pulse the wire then measure the impedance decay?
   Calibrate it against the cup anemometer until the cup anemometer breaks.
+- Trying the G-NiceRF 100mW LORA 915MHz module. https://www.nicerf.com/products/detail/100mw-lora-wireless-transceiver-module-lora1276-915.html But I may not be able to solder it. It is smaller than I thought and the eyes aren't what they were.
+- DS3231 RTC on I2C, with AT24C32 4kB EEPROM. From https://www.amazon.com/gp/product/B07V68443F I may use the EEPROM for the device configuration.
