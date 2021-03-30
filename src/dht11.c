@@ -6,6 +6,12 @@
 
 #define MAX_STATES 100
 
+/*
+** This is just to make sure everyting works according to my
+** understanding and is wired.
+**
+** Ultimately I will use a PIO pulse width reader for this.
+*/
 void probe_dht11( const unsigned char pin) {
     gpio_init( pin);
     gpio_pull_up( pin);   // pull-up
@@ -25,7 +31,7 @@ void probe_dht11( const unsigned char pin) {
     }
     #endif
     
-    bool state = 0;
+    bool state = 1;
     uint16_t stateTime[MAX_STATES] = { 0 };
     int states = 0;
     
@@ -58,5 +64,28 @@ void probe_dht11( const unsigned char pin) {
     printf("DHT11 %d bits sampled\n", states);
     for ( int i = 0; i < states; i += 2) {
 	printf( "  %3d %3d\n", stateTime[i], stateTime[i+1]);
+    }
+
+    if ( states >= 83) {
+	uint8_t bytes[5];
+	int b = 4;
+	for ( int byte = 0; byte < 5; byte++) {
+	    int a = 0;
+	    for ( int bit = 0; bit < 8; bit++) {
+		a = (a<<1) + ( (stateTime[b] > 50) ? 1 : 0 );
+		b += 2;
+	    }
+	    bytes[byte] = a;
+	}
+
+
+	uint8_t sum = bytes[0] + bytes[1] + bytes[2] + bytes[3];
+	if ( sum != bytes[4]) {
+	    printf("Checksum failed\n");
+	} else {
+	    printf( "RH=%2d.%02d TEMP=%d.%02d\n", bytes[0], bytes[1], bytes[2], bytes[3] );
+	}
+    } else {
+	printf("short read\n");
     }
 }
