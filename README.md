@@ -33,7 +33,7 @@ My Raspberry Pi Pico weather station
 - SCL in GP21
 - DS3231 RTC address is 0x68 (probably)
 - AT24C32 EEPROM address is 0x57 (probably)
-- BM280 addess is 0x76 (probably)
+- BM280 addess is 0x77 (this is the non-default alternate, but it's what answers on my board)
 
 ### DHT11
 

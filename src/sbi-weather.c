@@ -9,12 +9,17 @@
 #include "wipe.h"
 #include "store.h"
 #include "dht11.h"
+#include "i2c.h"
 
 const uint LED_PIN = 25;
 const uint DHT11_PIN = 22;
 
+const uint SDA_PIN = 20;
+const uint SCL_PIN = 21;
+
 static void probe(const char *cmd) {
     probe_dht11( DHT11_PIN);
+    probe_i2c( SCL_PIN, SDA_PIN);
 }
 
 const struct command commands[] = { { "wipe", wipe },
@@ -26,6 +31,7 @@ const struct command commands[] = { { "wipe", wipe },
 int main() {
     bi_decl(bi_program_description("SBI Weather"));
     bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
+    bi_decl(bi_2pins_with_func( SDA_PIN, SCL_PIN, GPIO_FUNC_I2C));
 
     adc_init();
     adc_set_temp_sensor_enabled(true);

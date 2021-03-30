@@ -13,6 +13,7 @@ pico_sdk_init()
 add_executable(sbi-weather
     src/sbi-weather.c
     src/dht11.c
+    src/i2c.c
     src/cli.c
     src/wipe.c
     src/info.c
@@ -34,6 +35,7 @@ target_link_libraries(sbi-weather
   pico_unique_id
   hardware_flash
   hardware_adc
+  hardware_i2c
   )
 
 # enable usb output, disable uart output
