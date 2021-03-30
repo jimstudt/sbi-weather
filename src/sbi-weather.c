@@ -8,12 +8,19 @@
 #include "info.h"
 #include "wipe.h"
 #include "store.h"
+#include "dht11.h"
 
 const uint LED_PIN = 25;
+const uint DHT11_PIN = 22;
+
+static void probe(const char *cmd) {
+    probe_dht11( DHT11_PIN);
+}
 
 const struct command commands[] = { { "wipe", wipe },
 				    { "info", print_info },
 				    { "store", print_store },
+				    { "probe", probe },
 				    { 0,0} };
 				   
 int main() {
@@ -25,7 +32,6 @@ int main() {
     
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
-
 
     stdio_init_all();
 

@@ -24,3 +24,18 @@ My Raspberry Pi Pico weather station
   Calibrate it against the cup anemometer until the cup anemometer breaks.
 - Trying the G-NiceRF 100mW LORA 915MHz module. https://www.nicerf.com/products/detail/100mw-lora-wireless-transceiver-module-lora1276-915.html But I may not be able to solder it. It is smaller than I thought and the eyes aren't what they were.
 - DS3231 RTC on I2C, with AT24C32 4kB EEPROM. From https://www.amazon.com/gp/product/B07V68443F I may use the EEPROM for the device configuration.
+
+## Wiring
+
+### I2C 0
+
+- SDA on GP20
+- SCL in GP21
+- DS3231 RTC address is 0x68 (probably)
+- AT24C32 EEPROM address is 0x57 (probably)
+- BM280 addess is 0x76 (probably)
+
+### DHT11
+
+- Pin is GP22
+
