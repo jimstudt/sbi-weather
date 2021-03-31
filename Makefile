@@ -1,12 +1,12 @@
 #
 # Path to my SDK installation
 #
-PICO_SDK_PATH ?= ~/pico-sdk
+PICO_SDK_PATH ?= ~/coding/pico-sdk
 
 #
 # Path to the mount point for my pico
 #
-PICO_MOUNT ?= /rpi-rp2
+PICO_MOUNT ?= /Volumes/RPI-RP2
 
 #
 # Path to my UF2 image in the build directory
@@ -16,7 +16,7 @@ IMAGE = build/sbi-weather.uf2
 all : $(IMAGE)
 
 install : all
-	mount $(PICO_MOUNT)
+	#mount $(PICO_MOUNT)
 	cp $(IMAGE) $(PICO_MOUNT)/foo
 	sync
 
