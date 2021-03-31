@@ -25,7 +25,7 @@ void probe_i2c( uint scl, uint sda) {
 	printf("No i2c devices found\n");
     }
 
-    if (0) {
+    if (1) {
 	uint8_t temperatureAddr[1] = { 0x11 };
 	uint8_t temperatureData[2];
 
