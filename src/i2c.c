@@ -24,4 +24,17 @@ void probe_i2c( uint scl, uint sda) {
     if ( !gotOne) {
 	printf("No i2c devices found\n");
     }
+
+    if (0) {
+	uint8_t temperatureAddr[1] = { 0x11 };
+	uint8_t temperatureData[2];
+
+	i2c_write_blocking( i2c0, 0x68, temperatureAddr, 1, true);
+	if ( i2c_read_blocking( i2c0, 0x68, temperatureData, 2, false) == 2) {
+	    int temperature = (temperatureData[0]&0x7f)*4 + (temperatureData[1]>>6);
+	    // broken for negative numebrs
+	    
+	    printf("DS3231 clock temperature is %d and %d/4 degrees.\n", temperature/4, temperature % 4);
+	}
+    }
 }
