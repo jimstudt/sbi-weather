@@ -16,9 +16,12 @@ IMAGE = build/sbi-weather.uf2
 all : $(IMAGE)
 
 install : all
-	#mount $(PICO_MOUNT)
+	[ -d $(PICO_MOUNT) ] || mount $(PICO_MOUNT)
 	cp $(IMAGE) $(PICO_MOUNT)/foo
 	sync
+	# will get an error for the disk going offline without an unmount
+	# but I can't find a sequence of commands that will get it 
+	# done without the error.
 
 clean :
 	rm -rf build pico_sdk_import.cmake
