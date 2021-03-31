@@ -1,4 +1,4 @@
-# sbi-weather
+AT24C32# sbi-weather
 My Raspberry Pi Pico weather station
 
 ## Salient Points
