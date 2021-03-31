@@ -18,6 +18,7 @@ add_executable(sbi-weather
     src/wipe.c
     src/info.c
     src/store.c
+    src/horology.c
 )
 
 #
@@ -36,6 +37,7 @@ target_link_libraries(sbi-weather
   hardware_flash
   hardware_adc
   hardware_i2c
+  hardware_rtc
   )
 
 # enable usb output, disable uart output

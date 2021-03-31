@@ -39,3 +39,29 @@ My Raspberry Pi Pico weather station
 
 - Pin is GP22
 
+## TODO
+
+- **DONE** Add a 'time 2021-01-01 12:34:56' command to set time in rtc
+- Make set RTC also set DS3231 (blocking is ok)
+- Make the sampling cycle
+  - Function to get DS3231 into datetime_t (blocking is ok)
+  - Load RTC from DS3231 on boot
+  - Use RTC alarm to trigger sampling cycle (set a flag for main loop)
+  - Add DHT11 scan to sampling cycle (blocking for now until I write PIO)
+  - Add DS3231 temperature to sampling cycle
+  - Pull in BME280 decoding from someone else
+  - Add BME280 decoding to sampling cycle (blocking for now)
+- Support TX23U
+  - Figure out wires and add them
+  - Add TX23U to probe command
+  - Add TX23U to sampling cycle
+- LORA support
+  - See if I can put wires on modules, or order bigger ones
+  - Wire up radio
+  - Make a receiver to USB stdio logger
+  - Choose modulation parameters
+  - Choose payload format
+- Build a dedicated receiver
+  - Choose meters/displays
+  - Wire up
+  - Code

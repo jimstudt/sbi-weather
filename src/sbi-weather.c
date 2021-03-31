@@ -3,6 +3,7 @@
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "hardware/adc.h"
+#include "hardware/rtc.h"
 
 #include "cli.h"
 #include "info.h"
@@ -10,6 +11,7 @@
 #include "store.h"
 #include "dht11.h"
 #include "i2c.h"
+#include "horology.h"
 
 const uint LED_PIN = 25;
 const uint DHT11_PIN = 22;
@@ -26,6 +28,7 @@ const struct command commands[] = { { "wipe", wipe },
 				    { "info", print_info },
 				    { "store", print_store },
 				    { "probe", probe },
+				    { "time", time_command },
 				    { 0,0} };
 				   
 int main() {
@@ -33,6 +36,8 @@ int main() {
     bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
     bi_decl(bi_2pins_with_func( SDA_PIN, SCL_PIN, GPIO_FUNC_I2C));
 
+    rtc_init();
+    
     adc_init();
     adc_set_temp_sensor_enabled(true);
     
