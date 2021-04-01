@@ -19,6 +19,7 @@ add_executable(sbi-weather
     src/info.c
     src/store.c
     src/horology.c
+    src/ds3231.c
 )
 
 #

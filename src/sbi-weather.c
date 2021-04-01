@@ -36,6 +36,8 @@ int main() {
     bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
     bi_decl(bi_2pins_with_func( SDA_PIN, SCL_PIN, GPIO_FUNC_I2C));
 
+    setup_i2c( SCL_PIN, SDA_PIN);
+    
     rtc_init();
     
     adc_init();
