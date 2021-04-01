@@ -4,8 +4,30 @@
 #include "hardware/rtc.h"
 #include "ds3231.h"
 
+// Should be const by rtc_set_datetime doesn't like that.
+static datetime_t epoch = { .year = 1970, .month = 1, .day = 1, .hour = 0, .min = 0, .sec = 0, .dotw = 4 };
+
+static bool horology_initialized = false;
+
+void horology_init(void) {
+    if ( horology_initialized ) return;
+    
+    rtc_init();
+
+    datetime_t n;
+    if ( !ds3231_get(&n)) {
+	printf("Failed to load time from DS3231\n");
+	rtc_set_datetime(&epoch);
+    } else {
+	rtc_set_datetime(&n);
+    }
+
+    horology_initialized = true;
+}
 
 void time_command(const char *cmd) {
+    if ( !horology_initialized) horology_init();
+    
     int year,month,day,hour,min,sec;
     char fluff;
     int parts = sscanf( cmd, " time %d-%d-%d %d:%d:%d %c",
@@ -27,15 +49,6 @@ void time_command(const char *cmd) {
 	}
     }
     
-    if ( !rtc_running()) {
-	datetime_t n = { .year = 2021, .month = 1, .day = 1, .hour = 12, .min = 34, .sec = 56 };
-
-	if ( !ds3231_get(&n)) {
-	    printf("Failed to load time from DS3231\n");
-	}
-	rtc_set_datetime(&n);
-    }
-
     if ( rtc_running()) {
 	datetime_t t;
 

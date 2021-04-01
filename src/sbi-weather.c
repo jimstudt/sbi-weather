@@ -38,8 +38,8 @@ int main() {
 
     setup_i2c( SCL_PIN, SDA_PIN);
     
-    rtc_init();
-    
+    horology_init();
+
     adc_init();
     adc_set_temp_sensor_enabled(true);
     
