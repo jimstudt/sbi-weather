@@ -48,13 +48,26 @@ int main() {
 
     stdio_init_all();
 
+    uint64_t nextSample = time_us_64()/1000000 + 1;
+    const uint32_t samplePeriod = 1;
+    
     while (true) {
 	uint64_t now = time_us_64();
+	uint64_t second = now/1000000;
+	
 	bool ledState = ( now/1000000)&1;
 	
         gpio_put( LED_PIN, ledState);
 
 	poll_cli( commands);
+
+	if ( second >= nextSample) {
+	    nextSample = second + samplePeriod;
+
+	    // get sensor data
+
+	    // send sensor data
+	}
     }
     return 0;
 }

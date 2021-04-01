@@ -41,13 +41,16 @@ My Raspberry Pi Pico weather station
 
 ## TODO
 
+- Maybe lose the DHT11? It's crap for accuracy and I can get a
+  fallback temperature from the DS3231.
 - **DONE** Add a 'time 2021-01-01 12:34:56' command to set time in rtc
 - **DONE** Make set RTC also set DS3231 (blocking is ok)
 - RTC returns bad time on first read in `time` command.
 - Make the sampling cycle
   - **DONE** Function to get DS3231 into datetime_t (blocking is ok)
   - **DONE** Load RTC from DS3231 on boot
-  - Use RTC alarm to trigger sampling cycle (set a flag for main loop)
+  - **DONE** Use system time to run sample look
+  - Got some sort of sleep into main loop to lower power
   - Add DHT11 scan to sampling cycle (blocking for now until I write PIO)
   - Add DS3231 temperature to sampling cycle
   - Pull in BME280 decoding from someone else
