@@ -49,7 +49,7 @@ int main() {
     stdio_init_all();
 
     while (true) {
-	uint64_t now = to_us_since_boot( get_absolute_time());
+	uint64_t now = time_us_64();
 	bool ledState = ( now/1000000)&1;
 	
         gpio_put( LED_PIN, ledState);

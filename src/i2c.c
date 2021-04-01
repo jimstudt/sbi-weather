@@ -96,11 +96,11 @@ void probe_i2c( uint scl, uint sda) {
 	    // This mess is repeatedly doing a read, which fails until
 	    // the write has completed and the device is ready again.
 	    //
-	    uint64_t startTime = to_us_since_boot( get_absolute_time());
+	    uint64_t startTime = time_us_64();
 	    while( 1) {
 		int ret = read_i2c_at_short( 0x57, 0x0000, &ok, 1);
 		if ( ret != 1) {
-		    uint64_t now = to_us_since_boot( get_absolute_time());
+		    uint64_t now = time_us_64();
 
 		    if ( now - startTime > 20000 ) {   // after 20ms without an ack, we have failed
 			printf("EEPROM ack check failed\n");

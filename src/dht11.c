@@ -45,11 +45,11 @@ void probe_dht11( const unsigned char pin) {
     
     gpio_set_dir( pin, GPIO_IN);
     
-    uint64_t startTime = to_us_since_boot( get_absolute_time());
+    uint64_t startTime = time_us_64();
     uint64_t lastChange = startTime;
     
     while( true) {
-	uint64_t now = to_us_since_boot( get_absolute_time());
+	uint64_t now = time_us_64();
 	if ( now - startTime > 5000) break;
 
 	if ( gpio_get(pin) != state) {

@@ -46,7 +46,7 @@ My Raspberry Pi Pico weather station
 - RTC returns bad time on first read in `time` command.
 - Make the sampling cycle
   - **DONE** Function to get DS3231 into datetime_t (blocking is ok)
-  - Load RTC from DS3231 on boot
+  - **DONE** Load RTC from DS3231 on boot
   - Use RTC alarm to trigger sampling cycle (set a flag for main loop)
   - Add DHT11 scan to sampling cycle (blocking for now until I write PIO)
   - Add DS3231 temperature to sampling cycle
