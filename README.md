@@ -53,7 +53,7 @@ My Raspberry Pi Pico weather station
   - Got some sort of sleep into main loop to lower power
   - Add DHT11 scan to sampling cycle (blocking for now until I write PIO)
   - Add DS3231 temperature to sampling cycle
-  - Pull in BME280 decoding from someone else
+  - **DONE** Pull in BME280 decoding from sdk examples
   - Add BME280 decoding to sampling cycle (blocking for now)
 - Support TX23U
   - Figure out wires and add them

@@ -1,7 +1,8 @@
 #
 # Path to my SDK installation
 #
-PICO_SDK_PATH ?= ~/coding/pico-sdk
+GUESS_SDK := $(firstword $(wildcard ~/coding/pico-sdk ~/Documents/coding/pico-sdk) )
+PICO_SDK_PATH ?= $(GUESS_SDK)
 
 #
 # Path to the mount point for my pico
