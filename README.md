@@ -1,5 +1,4 @@
-AT24C32# sbi-weather
-My Raspberry Pi Pico weather station
+# My Raspberry Pi Pico weather station
 
 ## Salient Points
 
@@ -11,6 +10,18 @@ My Raspberry Pi Pico weather station
   won't do rain, they just get plugged up in my environment.
 - Build host is a Raspberry Pi running Raspbian. Plain old tools, nothing fancy.
 - You can plug a console into the USB to configure and interrogate it.
+
+## Status
+
+This is in current development. A slight delay because my board has
+become increasingly flakey. I suspect a cat rubbing on it while it was
+upright in my tabletop vise has caused static damage, so I'm soldering
+up a new board.
+
+I'll leave off the second RJ45 jack and the DHT11 on this new
+board. The DHT11 is pretty crummy and if I want a backup temperature I
+can get it from the DS3231. The DHT11 humidity is too eratic to even
+be useful as a backup.
 
 ## Peripherals
 
