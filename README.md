@@ -13,22 +13,28 @@
 
 ## Status
 
-This is in current development. A slight delay because my board has
-become increasingly flakey. I suspect a cat rubbing on it while it was
-upright in my tabletop vise has caused static damage, so I'm soldering
-up a new board.
+This is in current development. 
 
-I'll leave off the second RJ45 jack and the DHT11 on this new
-board. The DHT11 is pretty crummy and if I want a backup temperature I
-can get it from the DS3231. The DHT11 humidity is too eratic to even
-be useful as a backup.
+The first development board was destroyed when a cat rubbed herself on
+it while it was in my test vise. I suspect static damage to the
+RP2040. It got flakey, break the USB subsytem of an RP4 if plugged in,
+but works fine on a mac, eventually I could flash it, verify the flash
+with picotool, but it would only start the program if I left it
+unplugged for an extended period of time. RIP prototype #1.
+
+Prototype #2 dispenses with the DHT11, its mostly useless as a backup
+since the RTC's thermometer is as accurate and the humidity sensor is
+pretty much garbage.
 
 ## Peripherals
 
 - BME280 pressure, humidity, temperature. The temperature accuracy isn't great.
   and is subject to self-heating.
 - Anemometer and direction froma LaCrosse TX23U wind sensor. This will need
-  a PIO state machine to record the bit stream timing for decoding.
+  a PIO state machine to record the bit stream timing for
+  decoding. See
+  https://www.john.geek.nz/2012/08/la-crosse-tx23u-anemometer-communication-protocol/
+  for a protocol description and pinout.
 - Maybe three or so one-wire temperature sensors to put on sunny side, shady side,
   and one in the ground?
 - Hot wire anemometer? I could pulse the wire then measure the impedance decay?
@@ -46,14 +52,23 @@ be useful as a backup.
 - AT24C32 EEPROM address is 0x57 (probably)
 - BM280 addess is 0x77 (this is the non-default alternate, but it's what answers on my board)
 
-### DHT11
+### TX23U
+
+- This goes to the RJ45 jack. The protocol reverse engineering refers
+  to a "brown" wire, which I assume is the RJ11 "black".
+  
+  | RJ11   | RJ45 T568A   | TX23U |
+  |--------|--------------|-------|
+  | Black  | Orange/white | Vcc   |
+  | Red    | Blue         | TxD   |
+  | Green  | Blue/white   | N.C.  |
+  | Yellow | Orange       | Gnd   |
 
 - Pin is GP22
 
 ## TODO
 
-- Maybe lose the DHT11? It's crap for accuracy and I can get a
-  fallback temperature from the DS3231.
+- Remove DHT11 support, reuse GP22 for TX23U.
 - **DONE** Add a 'time 2021-01-01 12:34:56' command to set time in rtc
 - **DONE** Make set RTC also set DS3231 (blocking is ok)
 - RTC returns bad time on first read in `time` command.
@@ -71,7 +86,7 @@ be useful as a backup.
   - Add TX23U to probe command
   - Add TX23U to sampling cycle
 - LORA support
-  - See if I can put wires on modules, or order bigger ones
+  - **DONE** See if I can put wires on modules. I can.
   - Wire up radio
   - Make a receiver to USB stdio logger
   - Choose modulation parameters
