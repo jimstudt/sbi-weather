@@ -59,8 +59,8 @@ pretty much garbage.
   
   | RJ11   | RJ45 T568A   | TX23U |
   |--------|--------------|-------|
-  | Black  | Orange/white | Vcc   |
-  | Red    | Blue         | TxD   |
+  | Black  | Orange/white | TxD   |
+  | Red    | Blue         | Vcc   |
   | Green  | Blue/white   | N.C.  |
   | Yellow | Orange       | Gnd   |
 

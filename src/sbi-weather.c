@@ -9,13 +9,13 @@
 #include "info.h"
 #include "wipe.h"
 #include "store.h"
-#include "dht11.h"
+#include "tx23u.h"
 #include "i2c.h"
 #include "horology.h"
 #include "bme280.h"
 
 const uint LED_PIN = 25;
-const uint DHT11_PIN = 22;
+const uint TX23U_PIN = 22;
 
 const uint SDA_PIN = 20;
 const uint SCL_PIN = 21;
@@ -23,7 +23,7 @@ const uint SCL_PIN = 21;
 const uint8_t BME280_DEVICE_ADDRESS = 0x77;
 
 static void probe(const char *cmd) {
-    probe_dht11( DHT11_PIN);
+    probe_tx23u( TX23U_PIN);
     probe_i2c( SCL_PIN, SDA_PIN);
 }
 
@@ -69,6 +69,7 @@ int main() {
 	if ( second >= nextSample) {
 	    nextSample = second + samplePeriod;
 
+#if 0
 	    // get sensor data
 	    struct bme280_sample_t b;
 	    if ( bme280_sample(&b)) {
@@ -78,6 +79,7 @@ int main() {
 	    }
 	    
 	    // send sensor data
+#endif
 	}
     }
     return 0;

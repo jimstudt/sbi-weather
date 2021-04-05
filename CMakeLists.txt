@@ -12,7 +12,7 @@ pico_sdk_init()
 
 add_executable(sbi-weather
     src/sbi-weather.c
-    src/dht11.c
+    src/tx23u.c
     src/i2c.c
     src/cli.c
     src/wipe.c
