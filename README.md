@@ -59,11 +59,15 @@ pretty much garbage.
   
   | RJ11   | RJ45 T568A   | TX23U |
   |--------|--------------|-------|
-  | Black  | Orange/white | TxD   |
-  | Red    | Blue         | Vcc   |
-  | Green  | Blue/white   | N.C.  |
-  | Yellow | Orange       | Gnd   |
+  | Yellow | Orange/white | GND   |
+  | Green  | Blue         | N.C.  |
+  | Red    | Blue/white   | Vcc   |
+  | Black  | Orange       | TxD   |
 
+  **Note:** I *really* through the RJ11 colors should go the other way
+  from my looking at wiring pictures on the internet, but the
+  continuity tester doesn't lie, and this is working for me.
+  
 - Pin is GP22
 
 ## TODO
