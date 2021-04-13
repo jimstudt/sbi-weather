@@ -79,6 +79,31 @@ enum state {
     TX23_DATA
 };
 
+union packet {
+    uint8_t byte[5];
+    struct {
+	uint64_t n0:4;
+	uint64_t n1:4;
+	uint64_t n2:4;
+	uint64_t n3:4;
+	uint64_t n4:4;
+	uint64_t n5:4;
+	uint64_t n6:4;
+	uint64_t n7:4;
+	uint64_t n8:4;
+    };
+    struct {
+	uint64_t dir:4;
+	uint64_t speed:12;
+	uint64_t csum:4;
+	uint64_t invertedDir:4;
+	uint64_t invertedSpeedLow:8;
+	uint64_t unused:4;
+	uint64_t invertedSpeedHigh:4;
+   };
+};
+
+
 static enum state state = TX23_IDLE;
 
 void tx23u_reset(void) {
@@ -89,15 +114,31 @@ static bool within( uint32_t value, uint32_t target, uint32_t tolerance) {
     return value >= ((int)target - tolerance) && value <= ((int)target + tolerance); 
 }
 
-static bool decode( uint8_t packet[], uint8_t *direction, uint16_t *speed) {
+static bool decode( uint8_t packetIn[], uint8_t *direction, uint16_t *speed) {
     printf("Got a wind packet! %02x %02x %02x %02x %02x\n",
-	   packet[0], packet[1], packet[2], packet[3], packet[4]);
-    
-    uint8_t sum1 = (packet[0] & 0x0f) + ((packet[0]>>4)&0x0f) + (packet[1]&0x0f) + ((packet[1]>>4)&0x0f);
-    uint8_t sum2 = (packet[2] & 0x0f);
-    
-    printf("  sum1=%02x sum2=%02x\n", sum1, sum2);
+	   packetIn[0], packetIn[1], packetIn[2], packetIn[3], packetIn[4]);
 
+    union packet packet;
+    memcpy( packet.byte, packetIn, 5);
+    
+    uint8_t sum1 = (packet.n0 + packet.n1 + packet.n2 + packet.n3) & 0x0f;
+    uint8_t sum2 = packet.n4;
+
+    if ( sum1 != sum2) {
+	printf("tx23u sum mismatch: sum1=%02x sum2=%02x\n", sum1, sum2);
+	return false;
+    }
+
+    uint16_t iSpeed = packet.invertedSpeedLow + (packet.invertedSpeedHigh << 8);
+    if ( packet.dir != ( ~packet.invertedDir & 0x0f) || packet.speed !=  ( ~iSpeed & 0x0fff) ) {
+	printf("tx23u inverted data mismatch: %02x-%02x  %04x-%04x\n",
+	       packet.dir, packet.invertedDir, packet.speed, iSpeed);
+	return false;
+    }
+
+    if ( direction) *direction = packet.dir;
+    if ( speed) *speed = packet.speed;
+    
     return true;
 }
 
