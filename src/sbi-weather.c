@@ -25,6 +25,14 @@ const uint8_t BME280_DEVICE_ADDRESS = 0x77;
 static void probe(const char *cmd) {
     probe_tx23u( TX23U_PIN);
     probe_i2c( SCL_PIN, SDA_PIN);
+
+    struct tx23u_sample_t t;
+    if ( tx23u_sample( TX23U_PIN, &t)) {
+	tx23u_print( &t);
+    } else {
+	printf("Failed to sample TX23U\n");
+    }
+    
 }
 
 const struct command commands[] = { { "wipe", wipe },
@@ -77,7 +85,14 @@ int main() {
 	    } else {
 		printf("Failed to sample BME280\n");
 	    }
-	    
+
+	    struct tx23u_sample_t t;
+	    if ( tx23u_sample( TX23U_PIN, &t)) {
+		tx23u_print( &t);
+	    } else {
+		printf("Failed to sample TX23U\n");
+	    }
+		       
 	    // send sensor data
 #endif
 	}
