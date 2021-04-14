@@ -70,9 +70,43 @@ pretty much garbage.
   
 - Pin is GP22
 
+### G-NiceRF 100mW LORA 915MHz module
+
+- This goes on SPI1 for convenient wiring.
+- There is a chipselect in the pinouts for SPI on the pico, but the
+  SDK doesn't mention it. The tutorials I see online use that pin, but
+  set it manually before doing blocking IO. I suspect the hardware can
+  do something with it that doesn't show in the SDK. I'll use it for
+  chip select and hope for a better future.
+- I am connecting the LORA RESET line to a pin so I can reset the
+  device from the processor if needed. The SX1276 docs say to leave it
+  floating. Pull it low for 100uS to do a reset then wait 5ms, but
+  elsewhere it says to wait 10ms before using SPI, so I'll go with 10ms.
+- I'm using the D0 pin from the module to hopefully get the RX,TX, and
+  maybe CADDone interrupts.
+- I reworked an antenna pigtail to solder to the board, but I think I
+  might rather just take the helical coil out of the duck antenna and
+  mount it straight to the module. This will need a little testing to
+  make sure it still performs well.
+  
+  | Module | Name   | Pico GPIO | Pico Pin |
+  |--------|--------|-----------|----------|
+  | 1      | GND    |           |          |
+  | 2      | N.C.   |           |          |
+  | 3      | N.C.   |           |          |
+  | 4      | SCK    | GP10      | 14       |
+  | 5      | MISO   | GP12      | 16       |
+  | 6      | MOSI   | GP11      | 15       |
+  | 7      | NSS    | GP13      | 17       |
+  | 8      | DIO2   |           |          |
+  | 9      | DIO1   |           |          |
+  | 10     | DIO0   | GP14      | 19       |
+  | 11     | Vcc    |           |          |
+  | 12     | NRESET | GP9       | 12       |
+  
 ## TODO
 
-- **DONE**Remove DHT11 support, reuse GP22 for TX23U.
+- **DONE** Remove DHT11 support, reuse GP22 for TX23U.
 - **DONE** Add a 'time 2021-01-01 12:34:56' command to set time in rtc
 - **DONE** Make set RTC also set DS3231 (blocking is ok)
 - RTC returns bad time on first read in `time` command.
