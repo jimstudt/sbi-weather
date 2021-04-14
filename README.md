@@ -72,7 +72,7 @@ pretty much garbage.
 
 ## TODO
 
-- Remove DHT11 support, reuse GP22 for TX23U.
+- **DONE**Remove DHT11 support, reuse GP22 for TX23U.
 - **DONE** Add a 'time 2021-01-01 12:34:56' command to set time in rtc
 - **DONE** Make set RTC also set DS3231 (blocking is ok)
 - RTC returns bad time on first read in `time` command.
@@ -81,14 +81,13 @@ pretty much garbage.
   - **DONE** Load RTC from DS3231 on boot
   - **DONE** Use system time to run sample look
   - Got some sort of sleep into main loop to lower power
-  - Add DHT11 scan to sampling cycle (blocking for now until I write PIO)
   - Add DS3231 temperature to sampling cycle
   - **DONE** Pull in BME280 decoding from sdk examples
-  - Add BME280 decoding to sampling cycle (blocking for now)
+  - **DONE** Add BME280 decoding to sampling cycle (blocking for now)
 - Support TX23U
-  - Figure out wires and add them
-  - Add TX23U to probe command
-  - Add TX23U to sampling cycle
+  - **DONE** Figure out wires and add them
+  - **DONE** Add TX23U to probe command
+  - **DONE** Add TX23U to sampling cycle
 - LORA support
   - **DONE** See if I can put wires on modules. I can.
   - Wire up radio
