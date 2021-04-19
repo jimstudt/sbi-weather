@@ -91,7 +91,7 @@ pretty much garbage.
   
   | Module | Name   | Pico GPIO | Pico Pin |
   |--------|--------|-----------|----------|
-  | 1      | GND    |           |          |
+  | 1      | GND    |           | rail     |
   | 2      | N.C.   |           |          |
   | 3      | N.C.   |           |          |
   | 4      | SCK    | GP10      | 14       |
@@ -101,7 +101,7 @@ pretty much garbage.
   | 8      | DIO2   |           |          |
   | 9      | DIO1   |           |          |
   | 10     | DIO0   | GP14      | 19       |
-  | 11     | Vcc    |           |          |
+  | 11     | Vcc    |           | rail     |
   | 12     | NRESET | GP9       | 12       |
   
 ## TODO
